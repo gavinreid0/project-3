@@ -1,16 +1,38 @@
-require('dotenv').config();
 const express = require('express');
-const connectDB = require("./config/db");
-const productRoutes = require('./routes/productRoutes');
+const { ApolloServer } = require('apollo-server-express');
+const path = require('path');
 
-connectDB();
+const { typeDefs, resolvers } = require('./schemas');
+// Import `authMiddleware()` function to be configured with the Apollo Server
+const { authMiddleware } = require('./utils/auth');
+const db = require('./config/db');
 
+const PORT = process.env.PORT || 3001;
 const app = express();
 
+const server = new ApolloServer({
+  typeDefs,
+  resolvers,
+  // Add context to our server so data from the `authMiddleware()` function can pass data to our resolver functions
+  context: authMiddleware,
+});
+
+server.applyMiddleware({ app });
+
+app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
 
-app.use('/api/products', productRoutes)
+if (process.env.NODE_ENV === 'production') {
+  app.use(express.static(path.join(__dirname, '../client/build')));
+}
 
-const PORT = process.env.PORT || 5001;
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build/index.html'));
+});
 
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+db.once('open', () => {
+  app.listen(PORT, () => {
+    console.log(`API server running on port ${PORT}!`);
+    console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
+  });
+});
