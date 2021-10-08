@@ -1,33 +1,27 @@
 {
-  "name": "project-3",
+  "name": "tech-friends",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "server/server.js",
   "scripts": {
     "start": "node server/server.js",
-    "server": "nodemon server/server.js",
-    "client": "npm start --prefix client",
-    "dev": "concurrently \"npm run server\" \"npm run client\"",
-    "data:import": "node server/seed.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/gavinreid0/project-3.git"
+    "develop": "concurrently \"cd server && npm run watch\" \"cd client && npm start\"",
+    "install": "cd server && npm i && cd ../client && npm i",
+    "seed": "cd server && npm run seed",
+    "build": "cd client && npm run build"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
-  "bugs": {
-    "url": "https://github.com/gavinreid0/project-3/issues"
-  },
-  "homepage": "https://github.com/gavinreid0/project-3#readme",
-  "dependencies": {
-    "dotenv": "^10.0.0",
-    "express": "^4.17.1",
-    "mongoose": "^6.0.9"
-  },
   "devDependencies": {
-    "concurrently": "^6.3.0",
-    "nodemon": "^2.0.13"
+    "concurrently": "^5.1.0"
+  },
+  "dependencies": {
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
+    "apollo-link-http": "^1.5.17",
+    "graphql": "^15.6.1",
+    "graphql-tag": "^2.12.5",
+    "react-apollo": "^3.1.5"
   }
 }

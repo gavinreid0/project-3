@@ -5,7 +5,7 @@ const path = require('path');
 const { typeDefs, resolvers } = require('./schemas');
 // Import `authMiddleware()` function to be configured with the Apollo Server
 const { authMiddleware } = require('./utils/auth');
-const db = require('./config/db');
+const db = require('./config/connection');
 
 const PORT = process.env.PORT || 3001;
 const app = express();

@@ -46,7 +46,7 @@ const SkillsList = ({ skills, isLoggedInUser = false }) => {
                       className="btn btn-sm btn-danger ml-auto"
                       onClick={() => handleRemoveSkill(skill)}
                     >
-                      X
+                      x
                     </button>
                   )}
                 </h4>
