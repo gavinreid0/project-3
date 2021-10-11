@@ -1,6 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+
 const ProfileList = ({ profiles, title }) => {
   if (!profiles.length) {
     return <h3>No Profiles Yet</h3>;
@@ -18,16 +19,28 @@ const ProfileList = ({ profiles, title }) => {
                   {profile.name} <br />
                   <span className="text-white" style={{ fontSize: '1rem' }}>
                     currently has {profile.skills ? profile.skills.length : 0}{' '}
-                    endorsed skill
-                    {profile.skills && profile.skills.length === 1 ? '' : 's'}
+                    shoe listing
+                    {profile.skills && profile.skills.length === 1 ? ' ' : 's: '}
                   </span>
+                  <div className='shoe-cards'>
+                    {
+                      profile.skills.map((skill, index) => (
+                        <span className="text-white" style={{ fontSize: '1rem' }}>
+                          {index === profile.skills.length - 1 ? skill : `${skill}, `}
+                        </span>
+                        // <ShoeCard shoe={objOfShoeData} />
+                      ))
+                    } 
+                  </div>
+                  
+
                 </h4>
 
                 <Link
                   className="btn btn-block btn-squared btn-light text-dark"
                   to={`/profiles/${profile._id}`}
                 >
-                  View and endorse their skills.
+                  View shoe listings.
                 </Link>
               </div>
             </div>

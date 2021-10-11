@@ -13,11 +13,11 @@ const Header = () => {
       <div className="container flex-column justify-space-between-lg justify-center align-center text-center">
         <Link className="text-dark" to="/">
           <h1 className="m-0" style={{ fontSize: '3rem' }}>
-            Tech Friends
+            Heat Street
           </h1>
         </Link>
         <p className="m-0" style={{ fontSize: '1.75rem', fontWeight: '700' }}>
-          Meet your new programming pals.
+          Sell your sole and take some others.
         </p>
         <div>
           {Auth.loggedIn() ? (
