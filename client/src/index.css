@@ -1,12 +1,18 @@
 :root {
-  --primary: #232F3E;
+  --primary: rgba(0, 0, 0, 0.701);
   --secondary: #F3A847;
-  --tertiary: #B12704;
-  --light: #fafafa;
-  --dark: #272f32;
+  --tertiary: #a9a7a7;
+  --light: #c1c1c1;
+  --dark: #eeecec;
   --error: rgb(228, 46, 1);
   --spacing-one: calc(1rem * 0.5);
   --spacing-two: calc(1rem);
+  background:
+  linear-gradient(
+    rgba(0, 0, 0, 0.5), 
+    rgba(0, 0, 0, 0.5)),
+    url(../src/images/bricks.jpeg)no-repeat;
+    background-size: cover;
 }
 
 * {
@@ -201,6 +207,16 @@ input:focus {
 
 .error-text {
   color: var(--error);
+}
+
+.card{
+  box-shadow: 0 0 .25rem rgba(0, 0, 0, .5);
+  background-color: rgba(0, 0, 0, 0.351) ;
+}
+
+img{
+  border-radius: 10%;
+  border:solid 5px rgba(0, 0, 0, 0.461);
 }
 
 @media screen and (max-width: 768px) {
