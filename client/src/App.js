@@ -55,7 +55,7 @@ function App() {
               <Route exact path="/orderHistory" component={OrderHistory} />
               <Route exact path="/products/:id" component={Detail} />
               <Route exact path="/me"><Profile /></Route>
-              <Route exact path="/profiles/:username"><Profile /></Route>
+              <Route exact path="/profiles/:firstName"><Profile /></Route>
               <Route exact path="/lists/:listId">
                 <List />
               </Route>

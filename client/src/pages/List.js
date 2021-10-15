@@ -54,7 +54,7 @@ function List(props) {
           />
         </div>
         <div className="flex-row space-between my-2">
-          <label htmlFor="imgdesc">whR IA FOINF ON</label>
+          <label htmlFor="imgdesc">Image:</label>
           <input
             placeholder="image"
             name="image"

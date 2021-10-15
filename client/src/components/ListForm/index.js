@@ -1,14 +1,14 @@
-import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
-import { useMutation } from '@apollo/client';
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
+import { useMutation } from "@apollo/client";
 
-import { ADD_LIST } from '../../utils/mutations';
-import { ADD_LISTS, QUERY_ME } from '../../utils/queries';
+import { ADD_LIST } from "../../utils/mutations";
+import { ADD_LISTS, QUERY_ME } from "../../utils/queries";
 
-import Auth from '../../utils/auth';
+import Auth from "../../utils/auth";
 
 const ListForm = () => {
-  const [listText, setListText] = useState('');
+  const [listText, setListText] = useState("");
 
   const [characterCount, setCharacterCount] = useState(0);
 
@@ -45,7 +45,7 @@ const ListForm = () => {
         },
       });
 
-      setListText('');
+      setListText("");
     } catch (err) {
       console.error(err);
     }
@@ -54,7 +54,7 @@ const ListForm = () => {
   const handleChange = (event) => {
     const { name, value } = event.target;
 
-    if (name === 'listText' && value.length <= 280) {
+    if (name === "listText" && value.length <= 280) {
       setListText(value);
       setCharacterCount(value.length);
     }
@@ -62,47 +62,66 @@ const ListForm = () => {
 
   return (
     <div>
-      <h3>What's on your techy mind?</h3>
+      <h3>Got some heat you wanna sell?</h3>
 
       {Auth.loggedIn() ? (
         <>
           <p
             className={`m-0 ${
-              characterCount === 280 || error ? 'text-danger' : ''
+              characterCount === 280 || error ? "text-danger" : ""
             }`}
           >
             Character Count: {characterCount}/280
           </p>
-          <form
-            className="flex-row justify-center justify-space-between-md align-center"
-            onSubmit={handleFormSubmit}
-          >
-            <div className="col-12 col-lg-9">
-              <textarea
-                name="listText"
-                placeholder="Here's a new list..."
-                value={listText}
-                className="form-input w-100"
-                style={{ lineHeight: '1.5', resize: 'vertical' }}
+          <form onSubmit={handleFormSubmit}>
+            <div className="flex-row space-between my-2">
+              <label htmlFor="email">Product Name:</label>
+              <input
+                placeholder="name your product"
+                name="name"
+                type="name"
+                id="name"
                 onChange={handleChange}
-              ></textarea>
+              />
             </div>
-
-            <div className="col-12 col-lg-3">
-              <button className="btn btn-primary btn-block py-3" type="submit">
-                Add List
-              </button>
+            <div className="flex-row space-between my-2">
+              <label htmlFor="description">Description:</label>
+              <input
+                placeholder="description"
+                name="description"
+                type="description"
+                id="description"
+                onChange={handleChange}
+              />
             </div>
-            {error && (
-              <div className="col-12 my-3 bg-danger text-white p-3">
-                {error.message}
-              </div>
-            )}
+            <div className="flex-row space-between my-2">
+              <label htmlFor="imgdesc">Image:</label>
+              <input
+                placeholder="image"
+                name="image"
+                type="imagedesc"
+                id="image"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex-row space-between my-2">
+              <label htmlFor="price">Price:</label>
+              <input
+                placeholder="price"
+                name="price"
+                type="price"
+                id="price"
+                onChange={handleChange}
+              />
+            </div>
+            <div className="flex-row flex-end">
+              <button type="submit">Submit</button>
+            </div>
           </form>
         </>
       ) : (
         <p>
-          You need to be logged in to share your lists. Please{' '}
+          You need to be logged in to share your lists. Please{" "}
           <Link to="/login">login</Link> or <Link to="/signup">signup.</Link>
         </p>
       )}
