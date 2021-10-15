@@ -68,3 +68,34 @@ export const QUERY_USER = gql`
     }
   }
 `;
+
+export const ADD_LISTS = gql`
+  mutation addList($listText: String!) {
+    addList(listText: $listText) {
+      _id
+      listText
+      listAuthor
+      createdAt
+      comments {
+        _id
+        commentText
+      }
+    }
+  }
+`;
+
+export const QUERY_ME = gql`
+query me {
+  me {
+    _id
+    firstName
+    email
+    lists {
+      _id
+      listText
+      listAuthor
+      createdAt
+    }
+  }
+}
+`;

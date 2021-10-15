@@ -3,13 +3,13 @@ import { Link } from "react-router-dom";
 import { useStoreContext } from "../../utils/GlobalState";
 import { ADD_TO_CART, UPDATE_CART_QUANTITY } from "../../utils/actions";
 import { idbPromise } from "../../utils/helpers";
-// import { useQuery } from "@apollo/client";
-// import { QUERY_USER } from "../../utils/queries";
+import { useQuery } from "@apollo/client";
+import { QUERY_USER } from "../../utils/queries";
 
 function ProductItem(item) {
   const [state, dispatch] = useStoreContext();
-  // const { data } = useQuery(QUERY_USER);
-  // let user = data.user;
+  const { data } = useQuery(QUERY_USER);
+  let user = data.user;
 
   const { image, name, _id, price } = item;
 
@@ -46,7 +46,7 @@ function ProductItem(item) {
         <span>${price}</span>
         {
           <div>
-            {/* Posted By: {user.firstName} {user.lastName} */}
+            Posted By: {user.firstName} {user.lastName}
           </div>
         }
       </div>
