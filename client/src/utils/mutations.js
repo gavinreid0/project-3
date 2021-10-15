@@ -68,10 +68,6 @@ export const ADD_LIST = gql`
       listText
       listAuthor
       createdAt
-      comments {
-        _id
-        commentText
-      }
     }
   }
 `;
