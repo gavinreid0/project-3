@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { Link } from 'react-router-dom';
-import { ADD_POST } from '../utils/mutations';
+import { ADD_LIST } from '../utils/mutations';
 
 
-function Create(props) {
+function List(props) {
   const [formState, setFormState] = useState({ name: '', description: '', image: '', price: '' });
-  const [add_post, { error }] = useMutation(ADD_POST);
+  const [add_post, { error }] = useMutation(ADD_LIST);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -29,9 +29,9 @@ function Create(props) {
 
   return (
     <div className="container my-1">
-      <Link to="/create">← Add Posting</Link>
+      <Link to="/list">← Add Posting</Link>
 
-      <h2>Create Posting</h2>
+      <h2>List Posting</h2>
       <form onSubmit={handleFormSubmit}>
         <div className="flex-row space-between my-2">
           <label htmlFor="email">Product Name:</label>
@@ -81,4 +81,4 @@ function Create(props) {
   );
 }
 
-export default Create;
+export default List;
