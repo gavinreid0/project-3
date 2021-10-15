@@ -61,7 +61,7 @@ const ListForm = () => {
   };
 
   return (
-    <div>
+    <div className="formList">
       <h3>Got some heat you wanna sell?</h3>
 
       {Auth.loggedIn() ? (
