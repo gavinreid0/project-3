@@ -4,6 +4,9 @@
 
 You know one thing people need at all times around the world? It is pretty easy: shoes. Regardless of your location on the planet, a new shoe store is always a good idea as a business venture. As it always happens, location and marketing play a significant role in your success.
 
+### Deployed App
+https://serene-coast-37833.herokuapp.com/
+
 ## App Function
 
 - Save your collection and make it sale!!
