@@ -20,6 +20,12 @@ const userSchema = new Schema({
     required: true,
     unique: true
   },
+  lists: [
+    {
+      type: Schema.Types.ObjectId,
+      ref: 'List',
+    },
+  ],
   password: {
     type: String,
     required: true,

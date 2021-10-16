@@ -60,3 +60,14 @@ export const ADD_POST = gql`
     addPost(name: $name, description: $description, image: $image, price: $price)
   }
 `;
+
+export const ADD_LIST = gql`
+  mutation addList($listText: String!) {
+    addList(listText: $listText) {
+      _id
+      listText
+      listAuthor
+      createdAt
+    }
+  }
+`;

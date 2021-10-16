@@ -1,5 +1,5 @@
 const { AuthenticationError } = require('apollo-server-express');
-const { User, Product, Category, Order } = require('../models');
+const { User, Product, Category, Order, List } = require('../models');
 const { signToken } = require('../utils/auth');
 const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
@@ -39,6 +39,19 @@ const resolvers = {
       }
 
       throw new AuthenticationError('Not logged in');
+    },
+    lists: async (parent, { username }) => {
+      const params = username ? { username } : {};
+      return List.find(params).sort({ createdAt: -1 });
+    },
+    list: async (parent, { listId }) => {
+      return List.findOne({ _id: listId });
+    },
+    me: async (parent, args, context) => {
+      if (context.user) {
+        return User.findOne({ _id: context.user._id }).populate('lists');
+      }
+      throw new AuthenticationError('You need to be logged in!');
     },
     order: async (parent, { _id }, context) => {
       if (context.user) {
@@ -136,7 +149,39 @@ const resolvers = {
       const token = signToken(user);
 
       return { token, user };
-    }
+    },
+    addList: async (parent, { listText }, context) => {
+      if (context.user) {
+        const list = await List.create({
+          listText,
+          listAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $addToSet: { lists: list._id } }
+        );
+
+        return list;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
+    removeList: async (parent, { listId }, context) => {
+      if (context.user) {
+        const list = await List.findOneAndDelete({
+          _id: listId,
+          listAuthor: context.user.username,
+        });
+
+        await User.findOneAndUpdate(
+          { _id: context.user._id },
+          { $pull: { lists: list._id } }
+        );
+
+        return list;
+      }
+      throw new AuthenticationError('You need to be logged in!');
+    },
   }
 };
 

@@ -43,7 +43,7 @@ function ProductItem(item) {
         <p>{name}</p>
       </Link>
       <div>
-        <span>${price}</span>
+        <span>{price}</span>
         {
           <div>
             {/* Posted By: {user.firstName} {user.lastName} */}
